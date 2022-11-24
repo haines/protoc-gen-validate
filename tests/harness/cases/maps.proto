@@ -22,6 +22,8 @@ message MapValues { map<string, string> val = 1 [(validate.rules).map.values.str
 message MapKeysPattern   { map<string, string> val = 1 [(validate.rules).map.keys.string.pattern = "(?i)^[a-z0-9]+$"]; }
 message MapValuesPattern { map<string, string> val = 1 [(validate.rules).map.values.string.pattern = "(?i)^[a-z0-9]+$"]; }
 
+message MapKeysValuesIn { map<string, string> val = 1 [(validate.rules).map = {keys: {string: {in: ["foo", "bar"]}}, values: {string: {in: ["baz", "qux"]}}}]; }
+
 message MapRecursive {
     map<uint32, Msg> val = 1;
     message Msg {

@@ -1177,12 +1177,18 @@ var mapCases = []TestCase{
 	{"map - keys - valid (pattern)", &cases.MapKeysPattern{Val: map[string]string{"A": "a"}}, 0},
 	{"map - keys - invalid", &cases.MapKeys{Val: map[int64]string{1: "a"}}, 1},
 	{"map - keys - invalid (pattern)", &cases.MapKeysPattern{Val: map[string]string{"A": "a", "!@#$%^&*()": "b"}}, 1},
+	{"map - keys - invalid (in)", &cases.MapKeysIn{Val: map[string]string{"qux": "a"}}, 1},
 
 	{"map - values - valid", &cases.MapValues{Val: map[string]string{"a": "Alpha", "b": "Beta"}}, 0},
 	{"map - values - valid (empty)", &cases.MapValues{Val: map[string]string{}}, 0},
 	{"map - values - valid (pattern)", &cases.MapValuesPattern{Val: map[string]string{"a": "A"}}, 0},
+	{"map - values - valid (in)", &cases.MapValuesIn{Val: map[string]string{"a": "foo"}}, 0},
 	{"map - values - invalid", &cases.MapValues{Val: map[string]string{"a": "A", "b": "B"}}, 2},
 	{"map - values - invalid (pattern)", &cases.MapValuesPattern{Val: map[string]string{"a": "A", "b": "!@#$%^&*()"}}, 1},
+	{"map - values - invalid (in)", &cases.MapValuesIn{Val: map[string]string{"a": "qux"}}, 1},
+
+	{"map - keys/values in - valid", &cases.MapKeysValuesIn{Val: map[string]string{"foo": "qux"}}, 0},
+	{"map - keys/values in - invalid", &cases.MapKeysValuesIn{Val: map[string]string{"qux": "foo"}}, 2},
 
 	{"map - recursive - valid", &cases.MapRecursive{Val: map[uint32]*cases.MapRecursive_Msg{1: {Val: "abc"}}}, 0},
 	{"map - recursive - invalid", &cases.MapRecursive{Val: map[uint32]*cases.MapRecursive_Msg{1: {}}}, 1},
